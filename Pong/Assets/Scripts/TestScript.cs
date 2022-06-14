@@ -22,6 +22,15 @@ public class TestScript : MonoBehaviour
         {
             racketMovement.MoveDown();
         }
+        if (Input.GetKey(KeyCode.A))
+        {
+            racketMovement.MoveForward();
+        }
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            racketMovement.MoveBackward();
+        }
 
     }
 }

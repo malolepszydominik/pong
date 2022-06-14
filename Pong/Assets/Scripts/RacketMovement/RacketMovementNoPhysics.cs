@@ -30,4 +30,22 @@ public class RacketMovementNoPhysics : MonoBehaviour, IRacketMovement
             currentTransform.position = Vector3.MoveTowards(currentTransform.position, movementDirection, movementSpeed);
         }
     }
+
+    public void MoveForward()
+    {
+        if (worldBounds.IsWithinForwardBounds())
+        {
+            Vector3 movementDirection = new Vector3(-20, 0, currentTransform.position.z);
+            currentTransform.position = Vector3.MoveTowards(currentTransform.position, movementDirection, movementSpeed);
+        }
+    }
+
+    public void MoveBackward()
+    {
+        if (worldBounds.IsWithinBackwardBounds())
+        { 
+            Vector3 movementDirection = new Vector3(20, 0, currentTransform.position.z);
+            currentTransform.position = Vector3.MoveTowards(currentTransform.position, movementDirection, movementSpeed);
+        }
+    }
 }

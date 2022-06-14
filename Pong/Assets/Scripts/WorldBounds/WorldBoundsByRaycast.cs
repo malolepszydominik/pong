@@ -5,15 +5,41 @@ public class WorldBoundsByRaycast : MonoBehaviour, IWorldBounds
     [SerializeField] private float raycastRange;
 
     private Transform currentTransfrom;
+    private Vector3 up;
     private Vector3 forward;
+
+    private void Awake()
+    {
+        currentTransfrom = this.transform;
+    }
 
     private void Start()
     {
-        currentTransfrom = this.transform;
-        forward = currentTransfrom.TransformDirection(Vector3.forward);
+        up = currentTransfrom.TransformDirection(Vector3.forward);
+        forward = currentTransfrom.TransformDirection(Vector3.left);
     }
 
     public bool IsWithinTopBounds()
+    {
+        if (Physics.Raycast(currentTransfrom.position, up, raycastRange))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public bool IsWithinBottomBounds()
+    {
+        if (Physics.Raycast(currentTransfrom.position, -up, raycastRange))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public bool IsWithinForwardBounds()
     {
         if (Physics.Raycast(currentTransfrom.position, forward, raycastRange))
         {
@@ -23,7 +49,7 @@ public class WorldBoundsByRaycast : MonoBehaviour, IWorldBounds
         return true;
     }
 
-    public bool IsWithinBottomBounds()
+    public bool IsWithinBackwardBounds()
     {
         if (Physics.Raycast(currentTransfrom.position, -forward, raycastRange))
         {

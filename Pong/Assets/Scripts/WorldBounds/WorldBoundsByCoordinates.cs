@@ -4,22 +4,17 @@ public class WorldBoundsByCoordinates : MonoBehaviour, IWorldBounds
 {
     [SerializeField] private float maxZPosition;
     [SerializeField] private float maxXPosition;
+    [SerializeField] private float minXPosition;
 
     private Transform currentTransform;
-    private Vector3 worldBounds;
     void Awake()
     {
         currentTransform = transform; 
     }
 
-    private void Start()
-    {
-        worldBounds = new Vector3(maxXPosition, 0, maxZPosition);
-    }
-
     public bool IsWithinTopBounds()
     {
-        if (currentTransform.position.z < worldBounds.z)
+        if (currentTransform.position.z < maxZPosition)
             return true;
 
         return false;
@@ -27,7 +22,23 @@ public class WorldBoundsByCoordinates : MonoBehaviour, IWorldBounds
 
     public bool IsWithinBottomBounds()
     {
-        if (currentTransform.position.z > -worldBounds.z)
+        if (currentTransform.position.z > -maxZPosition)
+            return true;
+
+        return false;
+    }
+
+    public bool IsWithinForwardBounds()
+    {
+        if (currentTransform.position.x > minXPosition)
+            return true;
+
+        return false;
+    }
+
+    public bool IsWithinBackwardBounds()
+    {
+        if (currentTransform.position.x < maxXPosition)
             return true;
 
         return false;

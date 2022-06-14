@@ -1,6 +1,11 @@
-public interface IRacketMovement
+interface IRacketMovement
 {
-    public void MoveUp() { }
+    public void MoveUp();
 
-    public void MoveDown() { }
+    public void MoveDown();
+
+    public void MoveForward();
+
+    public void MoveBackward();
+
 }
